@@ -1,3 +1,5 @@
 nginx/
 Dockerfile
+.dockeringore
+Jenkinsfile
 README.md

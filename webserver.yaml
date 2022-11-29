@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webserver-config
+data:
+  default.conf: |
+    server {
+      listen 80;
+      location / {
+          proxy_pass http://flaskapp:5000;
+      }
+    }
+---
+
+apiVersion: apps/v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: webserver
+spec:
+  type: LoadBalancer
+  selector:
+    app: webserver
+  ports:
+  - protocol: TCP
+    port: 80        # Defines the Service's port within the cluster
+    targetPort: 80  # Defines the Pod's port
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+  labels:
+    app: webserver
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webserver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      volumes:
+      - name: webserver-config-volume
+        configMap:
+          name: webserver-config
+      containers:
+      - name: webserver
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: webserver-config-volume
+          mountPath: /etc/nginx/conf.d
