@@ -11,8 +11,6 @@ pipeline{
             }
             stage('Deploy'){
                 steps{
-                    sh "kubectl delete -f flaskapp.yaml"
-                    sh "kubectl delete -f webserver.yaml"
                     sh "kubectl apply -f flaskapp.yaml"
                     sh "kubectl apply -f webserver.yaml"
                 }
