@@ -11,7 +11,8 @@ pipeline{
             stage('Push'){
                 steps{
                     sh '''
-                    docker push w1ldweasel/duoflask:latest w1ldweasel/duoflask:$BUILD_NUMBER
+                    docker push w1ldweasel/duoflask:latest
+                    docker push w1ldweasel/duoflask:$BUILD_NUMBER
                     '''
                 }
             }
