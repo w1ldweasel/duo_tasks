@@ -3,6 +3,7 @@ pipeline{
         stages{
             stage('Build'){
                 steps{
+                    sh "rmdir -rf ~/kubebuilds"
                     sh "mkdir ~/kubebuilds"
                     sh "cd ~/kubebuilds"
                     sh "git clone git@github.com:w1ldweasel/duotasks.git"
