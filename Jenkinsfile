@@ -22,6 +22,12 @@ pipeline{
                     kubectl apply -f . # instead of period can have a line for kubectl apply -f [each yaml file]
                     '''
                 }
+            stage('Cleanup'){
+                steps{
+                    sh '''
+                    docker system prune -a --force
+                    '''
+                }
             }
         }
 }
