@@ -8,8 +8,8 @@ spec:
     app: flaskapp
   ports:
   - protocol: TCP
-    port: 5000
-    targetPort: 5000
+    port: 5500
+    targetPort: 5500
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,4 +35,4 @@ spec:
       - name: flaskapp
         image: w1ldweasel/duoflask
         ports:
-        - containerPort: 5000
+        - containerPort: 5500

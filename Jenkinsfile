@@ -19,7 +19,7 @@ pipeline{
             stage('Deploy'){
                 steps{
                     sh '''
-                    kubectl apply -f .
+                    kubectl apply -f . # instead of period can have a line for kubectl apply -f [each yaml file]
                     '''
                 }
             }
