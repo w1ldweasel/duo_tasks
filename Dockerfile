@@ -13,7 +13,7 @@ RUN pip install -r "requirements.txt"
 ENV YOUR_NAME="HumptyDumpty"
 
 # Expose the correct port
-EXPOSE 5000
+EXPOSE 5500
 
 # Create an entrypoint
 ENTRYPOINT ["python", "app.py"]
