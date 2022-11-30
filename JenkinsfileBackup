@@ -4,15 +4,15 @@ pipeline{
             stage('Build'){
                 steps{
                     sh '''
-                    docker build -t mnduoflask:latest .
+                    docker build -t w1ldweasel/duoflask:latest -t w1ldweasel/duoflask:$BUILD_NUMBER .
                     '''
                 }
             }
             stage('Push'){
                 steps{
                     sh '''
-                    docker tag mnduoflask gcr.io/lbg-python-cohort-8/mnduoflask:latest
-                    docker push gcr.io/lbg-python-cohort-8/mnduoflask:latest
+                    docker push w1ldweasel/duoflask:latest
+                    docker push w1ldweasel/duoflask:$BUILD_NUMBER
                     '''
                 }
             }
